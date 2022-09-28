@@ -1,0 +1,30 @@
+<div class="container">
+  <!--data-->
+  <div *ngIf="sightings.length > 0">
+    <div class="col mt-5 mb-5">
+      <a class="btn btn-primary" [routerLink]='["sighting/add"]' title="Logout">Add sighting</a>
+    </div>
+    <div class="row">
+      <div class="col">
+       
+        <div class="card me-3" style="width: 30%;display:inline-block" *ngFor="let sight of sightings">
+          <img src="/resources/{{getImage(sight)}}" class="card-img-top sight-image-size" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{sight.model}}</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Make: </strong>{{sight.make}}</li>
+              <li class="list-group-item"><strong>Location: </strong>{{sight.location}}</li>
+              <li class="list-group-item"><strong>Date time: </strong>{{sight.dateandTime}}</li>
+            </ul>
+            <a href="#" class="btn btn-primary disabled">View photos</a>
+            <button class="btn btn-danger m-3" (click)="confirmAndDeleteSighting($event)" id="{{sight.id}}">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- no date -->
+  <div class="row  mt-5 mb-5" *ngIf="sightings.length == 0">
+    <h2>Please <a class="nav-link d-inline" [routerLink]='["sighting/add"]' title="Add">ADD</a> airplane sighting to begin.</h2>
+  </div>
+</div>

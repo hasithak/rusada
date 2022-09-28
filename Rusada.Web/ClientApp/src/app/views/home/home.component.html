@@ -1,0 +1,6 @@
+<div *ngIf="!(isAuthenticated | async)">
+  <app-guest></app-guest>
+</div>
+<div *ngIf="(isAuthenticated | async)">
+  <app-gallery></app-gallery>
+</div>

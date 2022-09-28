@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row">
+    <div class="col mt-5 mb-5">
+      <a class="nav-link d-inline  p-0" [routerLink]='["/"]' title="Back"><< Back</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <form (ngSubmit)="onSubmit($event)" id="sightingAddForm" [formGroup]="sightingForm">
+        <!--make-->
+        <div class="mb-3">
+          <label for="make" class="form-label">Make</label>
+          <p class="d-inline m-2 small"><em>ex: Boeing</em></p>
+          <input type="text" name="make" class="form-control" id="make" formControlName="make" max="128" required>
+
+          <div *ngIf="formValue.make?.invalid && (formValue.make?.dirty || formValue.make?.touched || formSubmit)"
+               class="invalid-feedback">
+            <div *ngIf="formValue.make?.errors?.['required']">
+              Make is required.
+            </div>
+          </div>
+
+        </div>
+        <!--model-->
+        <div class="mb-3">
+          <label for="model" class="form-label">Model</label>
+          <p class="d-inline m-2 small"><em>ex: 777-300ER</em></p>
+          <input type="text" class="form-control" id="model" formControlName="model" max="128" required>
+
+          <div *ngIf="formValue.model?.invalid && (formValue.model?.dirty || formValue.model?.touched || formSubmit)"
+               class="invalid-feedback">
+            <div *ngIf="formValue.model?.errors?.['required']">
+              Model is required.
+            </div>
+          </div>
+        </div>
+        <!--registration-->
+        <div class="mb-3">
+          <label for="registration" class="form-label">Registration</label>
+          <p class="d-inline m-2 small"><em>ex: G-RNAC</em></p>
+          <input type="text" class="form-control" id="registration" formControlName="registration" required>
+          <div *ngIf="formValue.registration?.invalid && (formValue.registration?.dirty || formValue.registration?.touched || formSubmit)"
+               class="invalid-feedback">
+            <div *ngIf="formValue.registration?.errors?.['required']">
+              Registration is required.
+            </div>
+          </div>
+        </div>
+        <!--location-->
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" formControlName="location" max="255" required>
+          <div *ngIf="formValue.location?.invalid && (formValue.location?.dirty || formValue.location?.touched || formSubmit)"
+               class="invalid-feedback">
+            <div *ngIf="formValue.location?.errors?.['required']">
+              Location is required.
+            </div>
+          </div>
+        </div>
+        <!--dateandTime-->
+        <div class="mb-3">
+          <label for="dateandTime" class="form-label">Date and time</label>
+          <p class="d-inline m-2 small"><em>yyyy-MM-dd HH:mm</em></p>
+          <input type="text" class="form-control" id="dateandTime" formControlName="dateandTime" required>
+          <div *ngIf="formValue.dateandTime?.invalid && (formValue.dateandTime?.dirty || formValue.dateandTime?.touched || formSubmit)"
+               class="invalid-feedback">
+            <div *ngIf="formValue.dateandTime?.errors?.['required']">
+              Date and time is required.
+            </div>
+          </div>
+        </div>
+        <!--file-->
+        <div class="mb-3">
+          <label for="file" class="form-label">Photos</label>
+          <input formControlName="file" id="file" type="file" class="form-control" multiple=""
+                 (change)="onFileChange($event)">
+          <div *ngIf="formValue.file.touched && formValue.file.invalid" class="alert alert-danger">
+            <div *ngIf="formValue.file.errors && formValue.file.errors.required">File is required.</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="img-preview" *ngFor='let url of images'>
+            <div class="mb-2" >
+              <img [src]="url" width="70%"> &nbsp;
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <a class="btn btn-primary" [routerLink]='["/"]'>Cancel</a> &nbsp;
+          <button type="submit" class="btn btn-danger" click=()>Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
